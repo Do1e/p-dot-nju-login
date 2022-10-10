@@ -37,6 +37,7 @@ def printOnlineList(session: requests.session) -> None:
             dataFrame = dataFrame[['acctstarttime', 'user_ipv4', 'mac']]
             dataFrame.columns = ['login time', 'IP addr', 'MAC addr']
             print(dataFrame.to_string(index=False))
+            return dataFrame
         else:
             print('获取在线设备失败')
     except Exception:
@@ -53,6 +54,7 @@ def printQuickLoginInfo(session: requests.session) -> None:
             dataFrame = dataFrame[['device', 'mac', 'id']]
             dataFrame.columns = ['device name', 'MAC addr', 'device id']
             print(dataFrame.to_string(index=False))
+            return dataFrame
         else:
             print('获取无感认证设备失败')
     except Exception:

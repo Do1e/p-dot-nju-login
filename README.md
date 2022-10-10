@@ -33,3 +33,4 @@
 * `login.py`：登录主程序
 * `logout.py`：登出主程序
 * `printInfo.py`：打印信息：余额、在线设备、无感认证设备
+* `quickLogin.py`：管理无感认证设备
