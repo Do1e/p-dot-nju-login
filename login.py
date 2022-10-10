@@ -57,7 +57,8 @@ class login:
         qr = getQR.QR(self.session)
         clear()
         qr.printQR()
-        self.testLogin(qr)
+        if self.testLogin(qr) != 0:
+            exit(-1)
 
         selector = etree.HTML(html)
         data = {

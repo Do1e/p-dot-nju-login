@@ -19,6 +19,7 @@ class QR:
 
     def printQR(self) -> None:
         self.getQR()
+        cv2.imwrite('QR.png', self.QR)
         char_full = '\u2588'
         char_up = '\u2580'
         char_down = '\u2584'

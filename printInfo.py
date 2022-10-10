@@ -22,7 +22,6 @@ def printUserInfo(session: requests.session) -> None:
             print('获取用户信息失败')
     except Exception:
         print('获取用户信息失败')
-    print('')
 
 def printOnlineList(session: requests.session) -> None:
     try:
@@ -42,7 +41,6 @@ def printOnlineList(session: requests.session) -> None:
             print('获取在线设备失败')
     except Exception:
         print('获取在线设备失败')
-    print('')
 
 def printQuickLoginInfo(session: requests.session) -> None:
     try:
@@ -59,7 +57,6 @@ def printQuickLoginInfo(session: requests.session) -> None:
             print('获取无感认证设备失败')
     except Exception:
         print('获取无感认证设备失败')
-    print('')
 
 def printInfo(session: requests.session) -> None:
     printUserInfo(session)
