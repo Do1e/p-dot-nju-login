@@ -12,9 +12,9 @@ class QR:
     def getQR(self) -> np.ndarray:
         self.ts = int(time.time()*1000)
         url = config.QRidURL % self.ts
-        self.QRid = self.session.get(url, timeout=config.getTimeout).text
+        self.QRid = self.session.get(url, **config.getkwargs).text
         url = config.QRURL % self.QRid
-        QRdata = self.session.get(url, timeout=config.getTimeout).content
+        QRdata = self.session.get(url, **config.getkwargs).content
         self.QR =  cv2.imdecode(np.frombuffer(QRdata, np.uint8), cv2.IMREAD_COLOR)
 
     def printQR(self) -> None:

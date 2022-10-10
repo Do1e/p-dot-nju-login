@@ -13,7 +13,7 @@ class login:
     def getStatus(self, qr: getQR.QR) -> str:
         url =config.statusURL % (qr.ts, qr.QRid)
         session = self.session
-        status = session.get(url, timeout=config.getTimeout).text
+        status = session.get(url, **config.getkwargs).text
         return status
 
     def testLogin(self, qr: getQR.QR) -> int:
@@ -38,7 +38,7 @@ class login:
 
     def isLogin(self) -> bool:
         try:
-            res = self.session.get(config.testURL, timeout=config.getTimeout)
+            res = self.session.get(config.testURL, **config.getkwargs)
             if res:
                 return True
             else:
@@ -50,7 +50,7 @@ class login:
         if self.isLogin():
             print('已登录')
             return 0
-        html = self.session.get(config.loginPURL, timeout=0.2).text
+        html = self.session.get(config.loginPURL, **config.getkwargs).text
 
         qr = getQR.QR(self.session)
         clear()
@@ -67,7 +67,7 @@ class login:
             '_eventId': selector.xpath('//input[@name="_eventId"]/@value')[0],
             'rmShown': selector.xpath('//input[@name="rmShown"]/@value')[0]
         }
-        res = self.session.post(config.loginPURL, data=data, timeout=config.getTimeout)
+        res = self.session.post(config.loginPURL, data=data, **config.getkwargs)
         if res:
             return 0
         else:

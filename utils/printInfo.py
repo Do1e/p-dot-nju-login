@@ -25,7 +25,7 @@ def printUserInfo(session: requests.session) -> None:
 
 def printOnlineList(session: requests.session) -> None:
     try:
-        res = session.get(config.onListURL, timeout=config.getTimeout)
+        res = session.get(config.onListURL, **config.getkwargs)
         if res:
             data = json.loads(res.text)
             dataFrame = pd.DataFrame(data['results']['rows'])
@@ -44,7 +44,7 @@ def printOnlineList(session: requests.session) -> None:
 
 def printQuickLoginInfo(session: requests.session) -> None:
     try:
-        res = session.get(config.quickLoginInfoURL, timeout=config.getTimeout)
+        res = session.get(config.quickLoginInfoURL, **config.getkwargs)
         if res:
             data = json.loads(res.text)
             if data['reply_code'] == 404:

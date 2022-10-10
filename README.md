@@ -23,6 +23,19 @@
   ```bash
   python3 main.py -o
   ```
+* 无感认证管理：
+  * 启用当前设备的无感认证：
+    ```bash
+    python3 main.py -a 笔记本电脑
+    ```
+  * 启用其他设备的无感认证，当前只能做Linux下以超级用户身份运行。需要指定当前设备连接校园网的网卡，如`wlo1`(使用`ifconfig`查看)，并指定另一个设备的MAC地址，可以连接到Windows笔记本的热点并在设置里面查看，其他方法也可自行查找。
+    ```bash
+    python3 main.py -a 树莓派 -m ab:cd:ef:01:23:45 -n wlo1
+    ```
+  * 删除设备的无感认证，需要指定设备id，使用`python3 main.py -p`查看。
+    ```bash
+    python3 main.py -d 166541052xxxxx
+    ```
 * 也可以使用`-h`参数查看更多功能
   ```bash
   python3 main.py -h

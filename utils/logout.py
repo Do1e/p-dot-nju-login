@@ -5,7 +5,7 @@ from . import config
 
 def logout(session: requests.session) -> None:
     try:
-        res = session.post(config.logoutURL, data='{"domain":"default"}', timeout=config.getTimeout)
+        res = session.post(config.logoutURL, data='{"domain":"default"}', **config.getkwargs)
         data = json.loads(res.text)
         assert data['reply_code'] == 0
         print('已退出')
