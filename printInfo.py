@@ -9,7 +9,7 @@ def int2ipv4(ip: int) -> str:
     l = [ip >> 24 & 0xff, ip >> 16 & 0xff, ip >> 8 & 0xff, ip & 0xff]
     return '.'.join([str(i) for i in l])
 
-def printInfo(session: requests.session) -> None:
+def printUserInfo(session: requests.session) -> None:
     try:
         res = session.get(config.userInfoURL % int(time.time() * 1000), \
             timeout=config.getTimeout)
@@ -22,7 +22,9 @@ def printInfo(session: requests.session) -> None:
             print('获取用户信息失败')
     except Exception:
         print('获取用户信息失败')
+    print('')
 
+def printOnlineList(session: requests.session) -> None:
     try:
         res = session.get(config.onListURL, timeout=config.getTimeout)
         if res:
@@ -39,6 +41,28 @@ def printInfo(session: requests.session) -> None:
             print('获取在线设备失败')
     except Exception:
         print('获取在线设备失败')
+    print('')
+
+def printQuickLoginInfo(session: requests.session) -> None:
+    try:
+        res = session.get(config.quickLoginInfoURL, timeout=config.getTimeout)
+        if res:
+            data = json.loads(res.text)
+            print('无感认证设备:')
+            dataFrame = pd.DataFrame(data['results']['rows'])
+            dataFrame = dataFrame[['device', 'mac']]
+            dataFrame.columns = ['device name', 'MAC addr']
+            print(dataFrame.to_string(index=False))
+        else:
+            print('获取无感认证设备失败')
+    except Exception:
+        print('获取无感认证设备失败')
+    print('')
+
+def printInfo(session: requests.session) -> None:
+    printUserInfo(session)
+    printOnlineList(session)
+    printQuickLoginInfo(session)
 
 if __name__ == '__main__':
     session = requests.session()

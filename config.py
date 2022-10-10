@@ -7,6 +7,7 @@ loginPURL = 'https://authserver.nju.edu.cn/authserver/login?service=http://p.nju
 pnjuURL = 'http://p.nju.edu.cn/portal/'
 userInfoURL = 'http://p.nju.edu.cn/api/portal/v1/getinfo?_=%d'
 onListURL = 'http://p.nju.edu.cn/api/selfservice/v1/online?page=1&limit=100&_=%d'
+quickLoginInfoURL = 'http://p.nju.edu.cn/api/portal/v1/quicklogin/domain/default?_=%d'
 logoutURL = 'http://p.nju.edu.cn/api/portal/v1/logout'
 testURL = 'https://www.baidu.com'
 
