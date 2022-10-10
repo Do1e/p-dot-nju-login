@@ -5,7 +5,6 @@ from lxml import etree
 import getQR
 import config
 from clear import clear
-from printInfo import printInfo
 
 class login:
     def __init__(self):
@@ -71,7 +70,6 @@ class login:
         }
         res = self.session.post(config.loginPURL, data=data, timeout=config.getTimeout)
         if res:
-            printInfo(self.session)
             return 0
         else:
             return -1
