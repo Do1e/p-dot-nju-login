@@ -16,9 +16,9 @@ def bind(session: requests.session, name: str) -> None:
         res = session.post(config.bindURL, data=data, **config.getkwargs)
         data = json.loads(res.text)
         assert data['reply_code'] == 0
-        print('已启用当前设备的无感认证')
+        print('已启用设备 %s 的无感认证' % name)
     except Exception:
-        print('启用当前设备的无感认证失败，检查是否已登录')
+        print('启用设备 %s 的无感认证失败，检查是否已登录' % name)
 
 def unbind(session: requests.session, deviceID: int) -> None:
     data = '{"id":"%d"}' % deviceID
@@ -41,25 +41,14 @@ def bindother(mac: str, adapterName: str, name: str) -> None:
         print('Mac地址无效')
         return
     mac = ':'.join(mac.groups()).lower()
-    info = subprocess.check_output('ifconfig', stderr=subprocess.STDOUT).decode()
 
     # 记录当前mac地址，以便恢复
-    names = re.findall(r'(.+):\sflags', info)
-    idxs = re.finditer(r'(.+):\sflags', info)
-    idxs = [i.span() for i in idxs]
-    if len(names) != len(idxs) or len(idxs) < 2:
-        print('使用ifconfig检查网卡是否正常工作')
-        return
     try:
-        i = names.index(adapterName)
-    except ValueError:
+        orMAC = subprocess.check_output(['cat', '/sys/class/net/%s/address' % adapterName], stderr=subprocess.STDOUT).decode()[:-1]
+    except subprocess.CalledProcessError:
         print('网卡 %s 不存在' % adapterName)
         return
-    if i == len(names) - 1:
-        info = info[idxs[i][1]:]
-    else:
-        info = info[idxs[i][1]:idxs[i+1][0]]
-    orMAC = re.search('ether\s+?(.+?)\s', info).group(1)
+        
     print('修改网卡%s的Mac地址：%s -> %s' % (adapterName, orMAC, mac))
     os.system('ifconfig %s down && ifconfig %s hw ether %s && ifconfig %s up' % (adapterName, adapterName, mac, adapterName))
 
