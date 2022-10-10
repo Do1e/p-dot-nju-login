@@ -50,8 +50,8 @@ def printQuickLoginInfo(session: requests.session) -> None:
             data = json.loads(res.text)
             print('无感认证设备:')
             dataFrame = pd.DataFrame(data['results']['rows'])
-            dataFrame = dataFrame[['device', 'mac']]
-            dataFrame.columns = ['device name', 'MAC addr']
+            dataFrame = dataFrame[['device', 'mac', 'id']]
+            dataFrame.columns = ['device name', 'MAC addr', 'device id']
             print(dataFrame.to_string(index=False))
         else:
             print('获取无感认证设备失败')
