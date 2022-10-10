@@ -3,7 +3,7 @@ import time
 import cv2
 import numpy as np
 
-import config
+from . import config
 
 class QR:
     def __init__(self, session: requests.session) -> None:

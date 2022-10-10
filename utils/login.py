@@ -2,9 +2,8 @@ import requests
 import time
 from lxml import etree
 
-import getQR
-import config
-from clear import clear
+from . import getQR, config
+from .clear import clear
 
 class login:
     def __init__(self):

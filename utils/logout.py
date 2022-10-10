@@ -1,7 +1,7 @@
 import requests
 import json
 
-import config
+from . import config
 
 def logout(session: requests.session) -> None:
     try:

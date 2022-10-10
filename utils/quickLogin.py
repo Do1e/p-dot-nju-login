@@ -1,10 +1,10 @@
 import requests
 import json
 
-import config
+from . import config
 
 def bind(session: requests.session, name: str) -> None:
-    data = '{"device":"%s"}' % name
+    data = ('{"device":"%s"}' % name).encode('utf-8')
     try:
         res = session.post(config.bindURL, data=data, timeout=config.getTimeout)
         data = json.loads(res.text)

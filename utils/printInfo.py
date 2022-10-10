@@ -3,7 +3,7 @@ import requests
 import time
 import pandas as pd
 
-import config
+from . import config
 
 def int2ipv4(ip: int) -> str:
     l = [ip >> 24 & 0xff, ip >> 16 & 0xff, ip >> 8 & 0xff, ip & 0xff]
@@ -47,12 +47,16 @@ def printQuickLoginInfo(session: requests.session) -> None:
         res = session.get(config.quickLoginInfoURL, timeout=config.getTimeout)
         if res:
             data = json.loads(res.text)
-            print('无感认证设备:')
-            dataFrame = pd.DataFrame(data['results']['rows'])
-            dataFrame = dataFrame[['device', 'mac', 'id']]
-            dataFrame.columns = ['device name', 'MAC addr', 'device id']
-            print(dataFrame.to_string(index=False))
-            return dataFrame
+            if data['reply_code'] == 404:
+                print('没有启用无感认证的设备')
+                return None
+            else:
+                print('无感认证设备:')
+                dataFrame = pd.DataFrame(data['results']['rows'])
+                dataFrame = dataFrame[['device', 'mac', 'id']]
+                dataFrame.columns = ['device name', 'MAC addr', 'device id']
+                print(dataFrame.to_string(index=False))
+                return dataFrame
         else:
             print('获取无感认证设备失败')
     except Exception:

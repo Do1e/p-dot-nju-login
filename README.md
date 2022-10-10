@@ -16,12 +16,16 @@
   ```
 * 登录
   ```bash
-  python3 login.py
+  python3 main.py -i
   ```
   会在终端打印统一身份验证的二维码，使用手机扫码登录即可。(未测试字体，若出问题请尝试更换终端字体，如`MesloLGS NF`、`Fira Code`)
 * 登出
   ```bash
-  python3 logout.py
+  python3 main.py -o
+  ```
+* 也可以使用`-h`参数查看更多功能
+  ```bash
+  python3 main.py -h
   ```
 
 ## 模块介绍
