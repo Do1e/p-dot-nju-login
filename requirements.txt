@@ -1,5 +1,3 @@
 requests
-opencv-python
-numpy
-lxml
 pandas
+NJUauth

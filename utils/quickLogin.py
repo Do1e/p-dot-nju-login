@@ -5,9 +5,9 @@ import os
 import platform
 import subprocess
 from time import sleep
+from NJUauth.QRlogin import QRlogin
 
 from . import config
-from .login import login
 from .logout import logout
 
 def bind(session: requests.session, name: str) -> None:
@@ -53,13 +53,14 @@ def bindother(mac: str, adapterName: str, name: str) -> None:
     os.system('ifconfig %s down && ifconfig %s hw ether %s && ifconfig %s up' % (adapterName, adapterName, mac, adapterName))
 
     sleep(2)
-    l = login()
-    if l.login() != 0:
-        exit(-1)
+    qrlogin = QRlogin()
+    session = qrlogin.login(config.destURL)
+    if session is None:
+        raise Exception('Login failed')
     sleep(2)
-    bind(l.session, name)
+    bind(session, name)
     sleep(2)
-    logout(l.session)
+    logout()
 
     print('还原本机Mac地址')
     os.system('ifconfig %s down && ifconfig %s hw ether %s && ifconfig %s up' % (adapterName, adapterName, orMAC, adapterName))

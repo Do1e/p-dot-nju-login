@@ -1,4 +1,6 @@
 import argparse
+import requests
+from NJUauth.QRlogin import QRlogin
 
 import utils
 
@@ -23,48 +25,58 @@ def judge_args(args: argparse.Namespace) -> bool:
     return True
 
 if __name__ == '__main__':
+    dest = utils.config.destURL
     args = get_args()
     if not judge_args(args):
         exit(-1)
-    l = utils.login()
+    qrlogin = QRlogin()
 
     if args.login:
-        if l.login() != 0:
-            exit(-1)
-        session = l.session
+        session = qrlogin.login(dest)
+        if session is None:
+            raise Exception('Login failed')
 
     if args.printinfo:
-        isLogin = l.isLogin()
+        isLogin = utils.isLogin()
         if not isLogin:
-            if l.login() != 0:
-                exit(-1)
-        session = l.session
+            session = qrlogin.login(dest)
+            if session is None:
+                raise Exception('Login failed')
+        else:
+            session = requests.Session()
+            session.headers.update(utils.config.headers)
         utils.printInfo(session)
         if not isLogin:
-            utils.logout(session)
+            utils.logout()
     
     if args.add:
         if args.mac and args.network:
             utils.bindother(args.mac, args.network, args.add)
         else:
-            isLogin = l.isLogin()
+            isLogin = utils.isLogin()
             if not isLogin:
-                if l.login() != 0:
-                    exit(-1)
-            session = l.session
+                session = qrlogin.login(dest)
+                if session is None:
+                    raise Exception('Login failed')
+            else:
+                session = requests.Session()
+                session.headers.update(utils.config.headers)
             utils.bind(session, args.add)
             if not isLogin:
-                utils.logout(session)
+                utils.logout()
 
     if args.delete:
-        isLogin = l.isLogin()
+        isLogin = utils.isLogin()
         if not isLogin:
-            if l.login() != 0:
-                exit(-1)
-        session = l.session
+            session = qrlogin.login(dest)
+            if session is None:
+                raise Exception('Login failed')
+        else:
+            session = requests.Session()
+            session.headers.update(utils.config.headers)
         utils.unbind(session, args.delete)
         if not isLogin:
-            utils.logout(session)
+            utils.logout()
     
     if args.logout:
-        utils.logout(l.session)
+        utils.logout()

@@ -1,9 +1,6 @@
 getTimeout = 2
 
-QRidURL = 'https://authserver.nju.edu.cn/authserver/qrCode/get?ts=%d'
-QRURL = 'https://authserver.nju.edu.cn/authserver/qrCode/code?uuid=%s'
-statusURL = 'https://authserver.nju.edu.cn/authserver/qrCode/status?ts=%d&uuid=%s'
-loginPURL = 'https://authserver.nju.edu.cn/authserver/login?service=http://p.nju.edu.cn/cas/&renew=true'
+destURL = 'http://p.nju.edu.cn/cas/&renew=true'
 pnjuURL = 'http://p.nju.edu.cn/portal/'
 userInfoURL = 'http://p.nju.edu.cn/api/portal/v1/getinfo?_=%d'
 onListURL = 'http://p.nju.edu.cn/api/selfservice/v1/online?page=1&limit=100&_=%d'

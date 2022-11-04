@@ -10,7 +10,7 @@
 * 这种方法使用的密码还是改版之前的校园网登录密码，新生或者忘记了这个密码可能还是需要使用下述统一身份验证的方法来登录。
 
 ## 使用方法
-* 本项目使用Python3编写，需要安装`requests`、`opencv-python`、`numpy`、`lxml`、`pandas`库。
+* 本项目使用Python3编写，需要安装requests、pandas、[NJUauth](https://github.com/Do1e/NJUauth)库。
   ```bash
   pip install requirements.txt
   ```
@@ -46,10 +46,8 @@
 ## 模块介绍
 欢迎用于其他登录场景，使用请注明出处。
 </br>
-* `clear.py`：清空命令行
 * `config.py`：配置文件，包含超时、url等
-* `getQR.py`：二维码类，包含获取二维码、打印二维码等方法
-* `login.py`：登录主程序
-* `logout.py`：登出主程序
+* `logout.py`：登出函数
 * `printInfo.py`：打印信息：余额、在线设备、无感认证设备
 * `quickLogin.py`：管理无感认证设备
+* `isLogin.py`：通过与testURL连接判断是否处于登录状态

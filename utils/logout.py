@@ -3,7 +3,9 @@ import json
 
 from . import config
 
-def logout(session: requests.session) -> None:
+def logout() -> None:
+    session = requests.Session()
+    session.headers.update(config.headers)
     try:
         res = session.post(config.logoutURL, data='{"domain":"default"}', **config.getkwargs)
         data = json.loads(res.text)
@@ -13,6 +15,4 @@ def logout(session: requests.session) -> None:
         print('退出失败')
 
 if __name__ == '__main__':
-    session = requests.session()
-    session.headers = config.headers
-    logout(session)
+    logout()
