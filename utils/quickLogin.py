@@ -5,7 +5,7 @@ import os
 import platform
 import subprocess
 from time import sleep
-from NJUauth.QRlogin import QRlogin
+from NJUlogin.QRlogin import QRlogin
 
 from . import config
 from .logout import logout

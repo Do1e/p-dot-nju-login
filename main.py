@@ -1,6 +1,6 @@
 import argparse
 import requests
-from NJUauth.QRlogin import QRlogin
+from NJUlogin.QRlogin import QRlogin
 
 import utils
 
