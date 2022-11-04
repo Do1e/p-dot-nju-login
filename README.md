@@ -8,7 +8,7 @@
   curl -s http://p.nju.edu.cn/portal_io/logout
   ```
 * 这种方法使用的密码还是改版之前的校园网登录密码，新生或者忘记了这个密码可能还是需要使用下述统一身份验证的方法来登录。
-* 注：本分支基于我的[NJUauth](https://github.com/Do1e/NJUauth)库，也可尝试main分支的版本。
+* 注：本分支基于我的[NJUauth](https://github.com/Do1e/NJUauth)库，也可尝试另一个分支，使用的都是比较官方的库。
 
 ## 使用方法
 * 本项目使用Python3编写，需要安装requests、pandas、[NJUauth](https://github.com/Do1e/NJUauth)库。
