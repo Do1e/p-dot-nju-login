@@ -80,3 +80,5 @@ if __name__ == '__main__':
     
     if args.logout:
         utils.logout()
+    
+    qrlogin.logout()
