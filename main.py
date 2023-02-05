@@ -1,11 +1,14 @@
 import argparse
 import requests
-from NJUlogin.QRlogin import QRlogin
+import NJUlogin
 
 import utils
 
 def get_args():
     parser = argparse.ArgumentParser()
+    parser.add_argument('-l', '--loginlib', type=str, metavar='loginlib', default='QRlogin', help='login library, QRlogin or pwdLogin, default is QRlogin')
+    parser.add_argument('-u', '--username', type=str, metavar='username', help='username, only used when loginlib is pwdLogin')
+    parser.add_argument('-w', '--password', type=str, metavar='password', help='password, only used when loginlib is pwdLogin')
     parser.add_argument('-i', '--login', action='store_true', default=False, help='login')
     parser.add_argument('-o', '--logout', action='store_true', default=False, help='logout')
     parser.add_argument('-p', '--printinfo', action='store_true', default=False, help='print info')
@@ -22,6 +25,9 @@ def judge_args(args: argparse.Namespace) -> bool:
     if args.login and args.logout:
         print('Error: cannot login and logout at the same time')
         return False
+    if args.loginlib == 'pwdLogin' and (args.username is None or args.password is None):
+        print('Error: username and password must be specified when loginlib is pwdLogin')
+        return False
     return True
 
 if __name__ == '__main__':
@@ -29,17 +35,23 @@ if __name__ == '__main__':
     args = get_args()
     if not judge_args(args):
         exit(-1)
-    qrlogin = QRlogin()
+    if args.loginlib == 'QRlogin':
+        loginlib = NJUlogin.QRlogin(utils.config.headers)
+    elif args.loginlib == 'pwdLogin':
+        loginlib = NJUlogin.pwdLogin(args.username, args.password, headers=utils.config.headers)
+    else:
+        print('Error: loginlib must be QRlogin or pwdLogin')
+        exit(-1)
 
     if args.login:
-        session = qrlogin.login(dest)
+        session = loginlib.login(dest)
         if session is None:
             raise Exception('Login failed')
 
     if args.printinfo:
         isLogin = utils.isLogin()
         if not isLogin:
-            session = qrlogin.login(dest)
+            session = loginlib.login(dest)
             if session is None:
                 raise Exception('Login failed')
         else:
@@ -48,14 +60,14 @@ if __name__ == '__main__':
         utils.printInfo(session)
         if not isLogin:
             utils.logout()
-    
+
     if args.add:
         if args.mac and args.network:
             utils.bindother(args.mac, args.network, args.add)
         else:
             isLogin = utils.isLogin()
             if not isLogin:
-                session = qrlogin.login(dest)
+                session = loginlib.login(dest)
                 if session is None:
                     raise Exception('Login failed')
             else:
@@ -68,7 +80,7 @@ if __name__ == '__main__':
     if args.delete:
         isLogin = utils.isLogin()
         if not isLogin:
-            session = qrlogin.login(dest)
+            session = loginlib.login(dest)
             if session is None:
                 raise Exception('Login failed')
         else:
@@ -77,8 +89,8 @@ if __name__ == '__main__':
         utils.unbind(session, args.delete)
         if not isLogin:
             utils.logout()
-    
+
     if args.logout:
         utils.logout()
-    
-    qrlogin.logout()
+
+    loginlib.logout()

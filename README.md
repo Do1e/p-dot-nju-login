@@ -1,14 +1,4 @@
 # 使用命令行登录南京大学校园网(p.nju.edu.cn)
-* 本项目是使用统一身份验证来登录，还有更简单的登录方法如下：
-  ```bash
-  # Windows需要安装最新的PowerShell
-  # 登录
-  curl -s http://p.nju.edu.cn/portal_io/login -X POST -d "username=学号&password=密码"
-  # 登出
-  curl -s http://p.nju.edu.cn/portal_io/logout
-  ```
-* 这种方法使用的密码还是改版之前的校园网登录密码，新生或者忘记了这个密码可能还是需要使用下述统一身份验证的方法来登录。
-* 注：本分支基于我的[NJUlogin](https://github.com/Do1e/NJUlogin)库，也可尝试另一个分支，使用的都是比较官方的库。
 
 ## 使用方法
 * 本项目使用Python3编写，需要安装requests、pandas、[NJUlogin](https://github.com/Do1e/NJUlogin)库。
@@ -29,8 +19,8 @@
     ```bash
     python3 main.py -a 笔记本电脑
     ```
-  * 启用其他设备的无感认证，当前只能做Linux下以超级用户身份运行。  
-    原理是将Linux下的mac地址更改到与另一个设备相同，开启无感认证后恢复为原来的mac地址，有一定概率出现bug。   
+  * 启用其他设备的无感认证，当前只能做Linux下以超级用户身份运行。
+    原理是将Linux下的mac地址更改到与另一个设备相同，开启无感认证后恢复为原来的mac地址，有一定概率出现bug。
     需要指定当前设备连接校园网的网卡，如`wlo1`(使用`ifconfig`查看)，并指定另一个设备的MAC地址，可以连接到Windows笔记本的热点并在设置里面查看，其他方法也可自行查找。
     ```bash
     python3 main.py -a 树莓派 -m ab:cd:ef:01:23:45 -n wlo1
