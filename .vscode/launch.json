@@ -1,0 +1,30 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "login", "args": ["-i"],
+            "type": "python", "request": "launch", "program": "main.py",
+            "console": "integratedTerminal", "justMyCode": true
+        },
+        {
+            "name": "logout", "args": ["-o"],
+            "type": "python", "request": "launch", "program": "main.py",
+            "console": "integratedTerminal", "justMyCode": true
+        },
+        {
+            "name": "printinfo", "args": ["-p"],
+            "type": "python", "request": "launch", "program": "main.py",
+            "console": "integratedTerminal", "justMyCode": true
+        },
+        {
+            "name": "add", "args": ["-a", "MIbook"],
+            "type": "python", "request": "launch", "program": "main.py",
+            "console": "integratedTerminal", "justMyCode": true
+        },
+        {
+            "name": "delete", "args": ["-d", "16759856478742"],
+            "type": "python", "request": "launch", "program": "main.py",
+            "console": "integratedTerminal", "justMyCode": true
+        }
+    ]
+}

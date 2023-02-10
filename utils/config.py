@@ -1,13 +1,12 @@
 getTimeout = 2
 
-destURL = 'http://p.nju.edu.cn/cas/&renew=true'
-pnjuURL = 'http://p.nju.edu.cn/portal/'
-userInfoURL = 'http://p.nju.edu.cn/api/portal/v1/getinfo?_=%d'
-onListURL = 'http://p.nju.edu.cn/api/selfservice/v1/online?page=1&limit=100&_=%d'
-quickLoginInfoURL = 'http://p.nju.edu.cn/api/portal/v1/quicklogin/domain/default?_=%d'
-bindURL = 'http://p.nju.edu.cn/api/portal/v1/quicklogin/bind/default'
-unbindURL = 'http://p.nju.edu.cn/api/portal/v1/quicklogin/unbind/id/%d'
-logoutURL = 'http://p.nju.edu.cn/api/portal/v1/logout'
+destURL = 'https://p.nju.edu.cn:443/api/cas/getinfo/&renew=true'
+userInfoURL = 'https://p.nju.edu.cn/api/portal/v1/getinfo?_=%d'
+onListURL = 'https://p.nju.edu.cn/api/selfservice/v1/online?page=1&limit=100&_=%d'
+quickLoginInfoURL = 'https://p.nju.edu.cn/api/portal/v1/quicklogin/domain/default?_=%d'
+bindURL = 'https://p.nju.edu.cn/api/portal/v1/quicklogin/bind/default'
+unbindURL = 'https://p.nju.edu.cn/api/portal/v1/quicklogin/unbind/id/%d'
+logoutURL = 'https://p.nju.edu.cn/api/portal/v1/logout'
 testURL = 'https://www.baidu.com'
 
 headers = {
