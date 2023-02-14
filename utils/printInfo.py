@@ -2,6 +2,7 @@ import json
 import requests
 import time
 import pandas as pd
+from lxml import etree
 
 from . import config
 
@@ -22,6 +23,34 @@ def printUserInfo(session: requests.session) -> None:
             print('获取用户信息失败')
     except Exception:
         print('获取用户信息失败')
+
+def printUseTime(session: requests.session) -> None:
+    try:
+        res = session.get(config.idURL % int(time.time() * 1000), \
+            timeout=config.getTimeout)
+        if res:
+            data = json.loads(res.text)
+            service_id = data['results']['service'][0]['id']
+        else:
+            print('获取service_id失败')
+            return
+    except Exception:
+        print('获取service_id失败')
+        return
+    month = int(time.strftime('%m', time.localtime()))
+    ts = int(time.time() * 1000)
+    try:
+        res = session.get(config.useTimeURL % (month, service_id, ts), \
+            timeout=config.getTimeout)
+        if res:
+            data = json.loads(res.text)
+            useTime = data['results']['use_volume'] / 60
+            h, m = divmod(useTime, 60)
+            print('已使用时长: %d小时%d分钟' % (h, m))
+        else:
+            print('获取使用时长失败')
+    except Exception:
+        print('获取使用时长失败')
 
 def printOnlineList(session: requests.session) -> None:
     try:
@@ -64,6 +93,7 @@ def printQuickLoginInfo(session: requests.session) -> None:
 
 def printInfo(session: requests.session) -> None:
     printUserInfo(session)
+    printUseTime(session)
     printOnlineList(session)
     printQuickLoginInfo(session)
 

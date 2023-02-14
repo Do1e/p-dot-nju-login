@@ -1,6 +1,8 @@
 getTimeout = 2
 
 destURL = 'https://p.nju.edu.cn:443/api/cas/getinfo/&renew=true'
+idURL = 'https://p.nju.edu.cn/api/selfservice/v1/userinfo?_=%d'
+useTimeURL = 'https://p.nju.edu.cn/api/selfservice/v1/volume/%02d/%d?_=%d'
 userInfoURL = 'https://p.nju.edu.cn/api/portal/v1/getinfo?_=%d'
 onListURL = 'https://p.nju.edu.cn/api/selfservice/v1/online?page=1&limit=100&_=%d'
 quickLoginInfoURL = 'https://p.nju.edu.cn/api/portal/v1/quicklogin/domain/default?_=%d'
