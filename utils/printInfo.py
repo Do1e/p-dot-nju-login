@@ -2,7 +2,6 @@ import json
 import requests
 import time
 import pandas as pd
-from lxml import etree
 
 from . import config
 
