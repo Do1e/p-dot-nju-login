@@ -42,3 +42,8 @@
 * `printInfo.py`：打印信息：余额、在线设备、无感认证设备
 * `quickLogin.py`：管理无感认证设备
 * `isLogin.py`：通过与testURL连接判断是否处于登录状态
+
+* `withnet`：设置需要修改的项之后，将此bash脚本放入环境变量的路径中即可实现临时登录并执行命令，执行完成后自动退出
+  ```bash
+  withnet ping www.baidu.com -c 5
+  ```
