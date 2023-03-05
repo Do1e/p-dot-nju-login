@@ -1,11 +1,5 @@
 # 使用命令行登录南京大学校园网(p.nju.edu.cn)
 
-----
-
-由于3月2日的更新，现在账号密码登录无法使用，暂时没有排查出原因
-
-----
-
 ## 使用方法
 * 本项目使用Python3编写，需要安装requests、pandas、[NJUlogin](https://github.com/Do1e/NJUlogin)库。
   ```bash
