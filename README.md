@@ -1,5 +1,14 @@
 # 使用命令行登录南京大学校园网(p.nju.edu.cn)
 
+使用`curl`命令可以简洁实现：
+
+```bash
+# 登录
+curl https://p.nju.edu.cn/api/portal/v1/login -X POST -d '{"username":"学号", "password":"密码"}'
+# 登出
+curl https://p.nju.edu.cn/api/portal/v1/logout -X POST -d '{}'
+```
+
 ## 使用方法
 * 本项目使用Python3编写，需要安装requests、pandas、[NJUlogin](https://github.com/Do1e/NJUlogin)库。
   ```bash
