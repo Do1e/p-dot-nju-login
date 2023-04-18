@@ -12,7 +12,7 @@ curl https://p.nju.edu.cn/api/portal/v1/logout -X POST -d '{}'
 ## 使用方法
 * 本项目使用Python3编写，需要安装requests、pandas、[NJUlogin](https://github.com/Do1e/NJUlogin)库。
   ```bash
-  pip install requirements.txt
+  pip install -r requirements.txt
   ```
 * 登录
   ```bash
