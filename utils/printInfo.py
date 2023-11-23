@@ -58,9 +58,9 @@ def printOnlineList(session: requests.session) -> None:
             data = json.loads(res.text)
             dataFrame = pd.DataFrame(data['results']['rows'])
             print('在线设备:')
-            dataFrame[['acctstarttime']] = dataFrame[['acctstarttime']].applymap( \
+            dataFrame[['acctstarttime']] = dataFrame[['acctstarttime']].map( \
                 lambda x: time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(x)))
-            dataFrame[['user_ipv4']] = dataFrame[['user_ipv4']].applymap(int2ipv4)
+            dataFrame[['user_ipv4']] = dataFrame[['user_ipv4']].map(int2ipv4)
             dataFrame = dataFrame[['acctstarttime', 'user_ipv4', 'mac']]
             dataFrame.columns = ['login time', 'IP addr', 'MAC addr']
             print(dataFrame.to_string(index=False))
