@@ -36,7 +36,7 @@ if __name__ == '__main__':
     if not judge_args(args):
         exit(-1)
     if args.loginlib == 'QRlogin':
-        loginlib = NJUlogin.QRlogin(utils.config.headers)
+        loginlib = NJUlogin.QRlogin(headers=utils.config.headers)
     elif args.loginlib == 'pwdLogin':
         loginlib = NJUlogin.pwdLogin(args.username, args.password, headers=utils.config.headers)
     else:
